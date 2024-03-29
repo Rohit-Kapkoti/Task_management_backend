@@ -2,14 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const tasksRouter = require('./routes/tasks');
+const dotenv = require('dotenv')
 
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const mongoUri = process.env.MONGO_URL
+
+console.log(mongoUri)
 
 // Connect to MongoDB
 mongoose
-    .connect("mongodb://127.0.0.1:27017/task_management")
+    .connect(mongoUri)
     .then(() => console.log("DBconnection is succesful"))
     .catch((err) => {
         console.log(err);
