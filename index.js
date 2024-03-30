@@ -12,11 +12,10 @@ const mongoUri = process.env.MONGO_URL
 
 console.log(mongoUri)
 
-const corsOptions = {
-    origin: 'https://taskflow12.netlify.app'
-};
-
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 // Connect to MongoDB
 mongoose
